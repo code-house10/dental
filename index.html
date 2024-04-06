@@ -32,8 +32,15 @@
     function checkVisited() {
       var visited = getCookie("visited");
       if (visited) {
-        // User has visited before, you can add your parameter to the URL here
-        window.location.href = "https://code-house10.github.io/dental/?visited=true";
+        var visitCount = parseInt(getCookie("visitCount")) || 0;
+        if (visitCount >= 2) {
+          // After the third visit, add parameter to the URL
+          window.location.href = "https://example.com?visited=true";
+        } else {
+          // Increment visit count and update the cookie
+          visitCount++;
+          setCookie("visitCount", visitCount, 365); // Cookie expires in 365 days
+        }
       } else {
         // Set cookie to mark this visit
         setCookie("visited", "true", 365); // Cookie expires in 365 days
@@ -41,9 +48,8 @@
     }
   </script>
 </head>
-<body">
+<body onload="checkVisited()">
   <h1>Welcome to My Website</h1>
   <p>This is the content of my website.</p>
 </body>
 </html>
-
