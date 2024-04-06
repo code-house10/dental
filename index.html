@@ -55,6 +55,17 @@
       }
     }
   </script>
+
+
+
+ <script>
+const urlParams = new URLSearchParams(window.location.search);
+const browserId = urlParams.get('browserId');
+
+console.log('Browser ID:', browserId);
+ </script>
+
+  
 </head>
 <body onload="checkBrowserId()">
   <h1>Welcome to My Website</h1>
