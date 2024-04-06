@@ -33,7 +33,7 @@
       var visited = getCookie("visited");
       if (visited) {
         var visitCount = parseInt(getCookie("visitCount")) || 0;
-        if (visitCount >= 2) {
+        if (visitCount >= 1) {
           // After the third visit, add parameter to the URL
           window.location.href = "https://code-house10.github.io/dental/?visited=true";
         } else {
