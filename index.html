@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+
+
+
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browser Identifier</title>
@@ -55,6 +61,29 @@
       }
     }
   </script>
+
+
+
+
+<script>
+    // Function to get the value of a URL parameter by name
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Get the value of the browserId parameter from the URL
+    var browserId = getUrlParameter('browserId');
+    
+    // Use the browserId value as needed
+    console.log('Browser ID:', browserId);
+  </script>
+
+
+
+  
 </head>
 <body onload="checkBrowserId()">
   <h1>Welcome to My Website</h1>
