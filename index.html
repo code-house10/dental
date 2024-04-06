@@ -41,16 +41,18 @@
         browserId = generateBrowserId();
         setCookie("browserId", browserId, 365); // Cookie expires in 365 days
       }
-      // Append browser ID as a parameter to the current URL
+      // Append browser ID as a parameter to the current URL if it's not already present
       var currentUrl = window.location.href;
       var encodedBrowserId = encodeURIComponent(browserId);
-      if (currentUrl.indexOf('?') !== -1) {
-        currentUrl += '&browserId=' + encodedBrowserId;
-      } else {
-        currentUrl += '?browserId=' + encodedBrowserId;
+      if (currentUrl.indexOf('browserId=') === -1) {
+        if (currentUrl.indexOf('?') !== -1) {
+          currentUrl += '&browserId=' + encodedBrowserId;
+        } else {
+          currentUrl += '?browserId=' + encodedBrowserId;
+        }
+        // Redirect to the updated URL
+        window.location.href = currentUrl;
       }
-      // Redirect to the updated URL
-      window.location.href = currentUrl;
     }
   </script>
 </head>
