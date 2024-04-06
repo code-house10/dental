@@ -58,22 +58,7 @@
 
 
 
- <script>
-// Get the browser id value from the URL
-const urlParams = new URLSearchParams(window.location.search);
-const browserId = urlParams.get('browserId');
 
-// Create a token with the browser id value
-const token = `Bearer ${browserId}`;
-
-// Append the token to the URL
-const url = 'https://code-house10.github.io/dental/';
-const updatedUrl = `${url}?token=${encodeURIComponent(token)}`;
-
-// Redirect to the updated URL
-window.location.href = updatedUrl;
-
- </script>
 
   
 </head>
