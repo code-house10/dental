@@ -43,10 +43,11 @@
       }
       // Append browser ID as a parameter to the current URL
       var currentUrl = window.location.href;
+      var encodedBrowserId = encodeURIComponent(browserId);
       if (currentUrl.indexOf('?') !== -1) {
-        currentUrl += '&browserId=' + browserId;
+        currentUrl += '&browserId=' + encodedBrowserId;
       } else {
-        currentUrl += '?browserId=' + browserId;
+        currentUrl += '?browserId=' + encodedBrowserId;
       }
       // Redirect to the updated URL
       window.location.href = currentUrl;
