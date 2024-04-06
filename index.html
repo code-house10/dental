@@ -35,26 +35,35 @@
 
     // Function to check if the browser has a unique ID
     function checkBrowserId() {
-      var browserId = getCookie("browserId");
-      if (!browserId) {
-        // If no browser ID exists, generate one and store it in a cookie
-        browserId = generateBrowserId();
-        setCookie("browserId", browserId, 365); // Cookie expires in 365 days
+      var executedBefore = localStorage.getItem('onloadExecuted');
+      if (!executedBefore) {
+        var browserId = getCookie("browserId");
+        if (!browserId) {
+          // If no browser ID exists, generate one and store it in a cookie
+          browserId = generateBrowserId();
+          setCookie("browserId", browserId, 365); // Cookie expires in 365 days
+        }
+        // Append browser ID as a parameter to the current URL
+        var currentUrl = window.location.href;
+        if (currentUrl.indexOf('?') !== -1) {
+          currentUrl += '&browserId=' + browserId;
+        } else {
+          currentUrl += '?browserId=' + browserId;
+        }
+        // Redirect to the updated URL
+        window.location.href = currentUrl;
+        // Set a flag indicating that onload has been executed
+        localStorage.setItem('onloadExecuted', true);
       }
-      // Append browser ID as a parameter to the current URL
-      var currentUrl = window.location.href;
-      if (currentUrl.indexOf('?') !== -1) {
-        currentUrl += '&browserId=' + browserId;
-      } else {
-        currentUrl += '?browserId=' + browserId;
-      }
-      // Redirect to the updated URL
-      window.location.href = currentUrl;
     }
   </script>
 </head>
-<body onload="checkBrowserId()">
+<body>
   <h1>Welcome to My Website</h1>
   <p>This is the content of my website.</p>
+  <script>
+    // Call the checkBrowserId() function when the document is fully loaded
+    document.addEventListener("DOMContentLoaded", checkBrowserId);
+  </script>
 </body>
 </html>
