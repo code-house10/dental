@@ -1,71 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-
-
-
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browser Identifier</title>
+  <title>Append Browser ID to URL</title>
+</head>
+<body>
   <script>
-    // Function to generate a random browser ID
-    function generateBrowserId() {
-      return Math.random().toString(36).substring(2) + Date.now().toString(36);
-    }
-
-    // Function to set a cookie
-    function setCookie(name, value, days) {
-      var expires = "";
-      if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
-
-    // Function to get a cookie value
-    function getCookie(name) {
-      var nameEQ = name + "=";
-      var ca = document.cookie.split(';');
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-      }
-      return null;
-    }
-
-    // Function to check if the browser has a unique ID
-    function checkBrowserId() {
-      var browserId = getCookie("browserId");
-      if (!browserId) {
-        // If no browser ID exists, generate one and store it in a cookie
-        browserId = generateBrowserId();
-        setCookie("browserId", browserId, 365); // Cookie expires in 365 days
-      }
-      // Append browser ID as a parameter to the current URL if it's not already present
-      var currentUrl = window.location.href;
-      var encodedBrowserId = encodeURIComponent(browserId);
-      if (currentUrl.indexOf('browserId=') === -1) {
-        if (currentUrl.indexOf('?') !== -1) {
-          currentUrl += '&browserId=' + encodedBrowserId;
-        } else {
-          currentUrl += '?browserId=' + encodedBrowserId;
-        }
-        // Redirect to the updated URL
-        window.location.href = currentUrl;
-      }
-    }
-  </script>
-
-
-
-
-<script>
     // Function to get the value of a URL parameter by name
     function getUrlParameter(name) {
       name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -77,24 +18,16 @@
     // Get the value of the browserId parameter from the URL
     var browserId = getUrlParameter('browserId');
     
-    // Use the browserId value as needed
-    console.log('Browser ID:', browserId);
+    // Check if browserId is present in the URL
+    if (browserId) {
+      // Construct the new URL with the browserId appended
+      var newUrl = 'https://code-house10.github.io/dental?browserId=' + encodeURIComponent(browserId);
+      
+      // Redirect to the new URL
+      window.location.href = newUrl;
+    } else {
+      console.log('browserId parameter is missing from the URL.');
+    }
   </script>
-
-
-
-  
-</head>
-<body onload="checkBrowserId()">
-  <h1>Welcome to My Website</h1>
-  <p>This is the content of my website.</p>
-
-<script type="text/javascript">checkdirect(21,1)</script>
-  
-<input type="hidden" id="hidLocation" value="https://www.data.codehouse.host/"/>
-<script>var clpconfig = {};</script>
-<script type="text/javascript" src="https://www.data.codehouse.host/landing.js"></script>
-
-  
 </body>
 </html>
